@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#143a66">
+  <meta name="description" content="Quiz di allenamento per le progressioni 2026: 180 quesiti, quattro materie e ripasso degli errori.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Quiz 2026">
+  <title>Quiz Progressioni 2026</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Vai al contenuto</a>
+  <header class="app-header">
+    <div class="header-inner">
+      <button class="brand" id="brand-home" type="button" aria-label="Torna alla home">
+        <span class="brand-mark" aria-hidden="true">Q</span>
+        <span><strong>Quiz Progressioni</strong><small>2026</small></span>
+      </button>
+      <div class="header-actions">
+        <span class="offline-pill" id="connection-status" hidden>Offline</span>
+        <button class="button button-ghost button-small" id="install-button" type="button" hidden>Installa app</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="page-shell">
+    <section id="home-view" class="view" aria-labelledby="home-title">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Allenamento · 180 quesiti</p>
+          <h1 id="home-title">Preparati, una domanda alla volta.</h1>
+          <p class="hero-copy">Scegli la materia e la durata. Le risposte cambiano ordine a ogni sessione e la correzione è immediata.</p>
+        </div>
+        <div class="hero-stat" aria-label="Banca dati completa">
+          <strong>180</strong><span>quesiti incorporati</span>
+        </div>
+      </div>
+
+      <div class="home-grid">
+        <section class="panel setup-panel" aria-labelledby="subject-title">
+          <div class="section-heading">
+            <span class="step-number">1</span>
+            <div><h2 id="subject-title">Scegli la materia</h2><p>Puoi anche mescolare l’intera banca dati.</p></div>
+          </div>
+          <div class="subject-grid" id="subject-options" role="radiogroup" aria-label="Materia">
+            <button class="choice-card selected" type="button" data-subject="all" role="radio" aria-checked="true">
+              <span class="choice-icon all" aria-hidden="true">∞</span><span><strong>Tutte le materie</strong><small>180 quesiti</small></span><span class="check" aria-hidden="true">✓</span>
+            </button>
+            <button class="choice-card" type="button" data-subject="criminal" role="radio" aria-checked="false">
+              <span class="choice-icon criminal" aria-hidden="true">P</span><span><strong>Procedura penale</strong><small>30 quesiti</small></span><span class="check" aria-hidden="true">✓</span>
+            </button>
+            <button class="choice-card" type="button" data-subject="civil" role="radio" aria-checked="false">
+              <span class="choice-icon civil" aria-hidden="true">C</span><span><strong>Procedura civile</strong><small>30 quesiti</small></span><span class="check" aria-hidden="true">✓</span>
+            </button>
+            <button class="choice-card" type="button" data-subject="registry" role="radio" aria-checked="false">
+              <span class="choice-icon registry" aria-hidden="true">S</span><span><strong>Servizi di cancelleria</strong><small>90 quesiti</small></span><span class="check" aria-hidden="true">✓</span>
+            </button>
+            <button class="choice-card" type="button" data-subject="administrative" role="radio" aria-checked="false">
+              <span class="choice-icon administrative" aria-hidden="true">A</span><span><strong>Diritto amministrativo</strong><small>30 quesiti</small></span><span class="check" aria-hidden="true">✓</span>
+            </button>
+          </div>
+
+          <div class="section-heading compact">
+            <span class="step-number">2</span>
+            <div><h2 id="count-title">Numero di domande</h2><p>Scegli la durata dell’allenamento.</p></div>
+          </div>
+          <div class="segmented" id="count-options" role="radiogroup" aria-labelledby="count-title">
+            <button type="button" data-count="10" role="radio" aria-checked="false">10</button>
+            <button class="selected" type="button" data-count="20" role="radio" aria-checked="true">20</button>
+            <button type="button" data-count="30" role="radio" aria-checked="false">30</button>
+          </div>
+
+          <div class="mode-card" aria-label="Modalità Allenamento selezionata">
+            <span class="mode-icon" aria-hidden="true">✓</span>
+            <span><strong>Modalità Allenamento</strong><small>Correzione immediata dopo ogni risposta</small></span>
+          </div>
+
+          <button class="button button-primary button-wide" id="start-button" type="button">Inizia allenamento <span aria-hidden="true">→</span></button>
+        </section>
+
+        <aside class="panel review-panel" aria-labelledby="review-title">
+          <div class="review-visual" aria-hidden="true"><span>↻</span></div>
+          <p class="eyebrow">Memoria locale</p>
+          <h2 id="review-title">Ripassa gli errori</h2>
+          <p>Le domande sbagliate restano su questo dispositivo. Rispondi correttamente durante il ripasso per rimuoverle.</p>
+          <div class="error-counter"><strong id="saved-error-count">0</strong><span>errori da ripassare</span></div>
+          <button class="button button-secondary button-wide" id="review-button" type="button" disabled>Avvia ripasso</button>
+          <button class="text-button" id="clear-errors-button" type="button" hidden>Azzera errori salvati</button>
+          <p class="privacy-note"><span aria-hidden="true">⌁</span> Nessun login e nessun dato inviato online.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="quiz-view" class="view" hidden aria-labelledby="question-text">
+      <div class="quiz-topline">
+        <button class="back-button" id="quit-button" type="button"><span aria-hidden="true">←</span> Esci</button>
+        <span class="mode-label" id="quiz-mode-label">Allenamento</span>
+        <span class="live-score" id="live-score">0 corrette</span>
+      </div>
+      <div class="progress-meta"><span id="progress-label">Domanda 1 di 20</span><span id="subject-label">Tutte le materie</span></div>
+      <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+
+      <article class="question-card">
+        <p class="question-number" id="question-number">QUESITO 1</p>
+        <h1 id="question-text"></h1>
+        <div class="answer-list" id="answer-list" role="group" aria-label="Risposte disponibili"></div>
+        <div class="feedback" id="feedback" aria-live="polite" hidden></div>
+        <button class="button button-primary next-button" id="next-button" type="button" hidden>Prossima domanda <span aria-hidden="true">→</span></button>
+      </article>
+      <p class="keyboard-hint">Suggerimento: su PC puoi rispondere con i tasti A, B o C.</p>
+    </section>
+
+    <section id="results-view" class="view" hidden aria-labelledby="results-title">
+      <div class="results-hero panel">
+        <div class="score-ring" id="score-ring"><div><strong id="score-percent">0%</strong><span>risultato</span></div></div>
+        <div class="results-copy">
+          <p class="eyebrow" id="result-eyebrow">Allenamento completato</p>
+          <h1 id="results-title">Risultato</h1>
+          <p id="result-message"></p>
+          <div class="result-stats">
+            <div><strong id="correct-total">0</strong><span>Corrette</span></div>
+            <div><strong id="wrong-total">0</strong><span>Errate</span></div>
+            <div><strong id="question-total">0</strong><span>Totale</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button class="button button-primary" id="results-review-button" type="button">Ripassa gli errori</button>
+        <button class="button button-secondary" id="new-quiz-button" type="button">Nuovo quiz</button>
+      </div>
+
+      <section class="mistakes-section" id="mistakes-section" aria-labelledby="mistakes-title">
+        <div class="section-title-row"><div><p class="eyebrow">Da rivedere</p><h2 id="mistakes-title">Domande sbagliate</h2></div><span class="count-badge" id="mistakes-count">0</span></div>
+        <div id="mistakes-list" class="mistakes-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer><span>Quiz Progressioni 2026</span><span>v1.0.0 · Dati salvati solo sul dispositivo</span></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
